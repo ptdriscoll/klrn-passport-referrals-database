@@ -3,7 +3,7 @@ Thumbs.db
 *.pyc
 *.log
 ARCHIVED/
-reference/
+references/
 tests/
 app/committed/
 app/test2.py
