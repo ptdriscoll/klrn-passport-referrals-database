@@ -38,6 +38,8 @@ To help check scrapers, the scrape_page() functions in db_referrers.py and db_vi
 
 Also, scrapers_selenium.py uses chromedriver.exe, located in the bin folder. Code often breaks when a chromedriver.exe version is too old.
 
+![](images/stats.jpg)
+
 ### Charting and graphing  
 
 To run visualizations, the Python library Matplotlib must be installed.
@@ -53,10 +55,6 @@ The queries_views_episodes.py can be run alone or through queries_views_channels
 <br>
 
 ![](images/trending_stats.jpg)
-
-<br>
-
-![](images/stats.jpg)
 
 ### Searching the database
 
