@@ -79,7 +79,8 @@ These files store other background functions:
 
 - Create one run file to handle all data-gathering files
 - Add command line interface
-- Move online, and add user login 
+- Refactor to handle PBS switch to emphasize video slugs over IDs
+- Move online, refactor as needed, and add user login 
 - Add dashboard  
 - Set chron job to update daily, and send status emails
 - Add ability to schedule email dashboard reports
