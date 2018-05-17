@@ -8,3 +8,5 @@ references/
 tests/
 app/committed/
 app/test2.py
+app/Thumbs.db
+images/Thumbs.db
