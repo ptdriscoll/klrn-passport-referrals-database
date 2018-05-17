@@ -51,8 +51,11 @@ These files create tables and graphics, and adds them to the output folder. Each
 The queries_views_episodes.py can be run alone or through queries_views_channels.py by setting `run_episodes = True`
 
 <br>
+
 ![](images/trending_stats.jpg)
+
 <br>
+
 ![](images/stats.jpg)
 
 ### Searching the database
