@@ -8,8 +8,6 @@ This application pulls daily stats for URLS with the "referrer=" tag, along with
 
 Another part of the application charts and visualizes top shows and episodes that send the most people to KLRN's Passport donation page, and which ones bring in the most dollars.
 
-<br>
-
 ![Top Shows and Donations](images/top_shows_donations.png) 
 
 ### Getting started
@@ -29,9 +27,9 @@ These files, in this order, retrieve daily page stats from Google Analytics, scr
 In the db_conn() function in the db_pages.py file, there is a line to set the default starting date for Google Analytics. It only needs to be set once - a SQL query then checks the most recent updates and starts from there.
 
 ```python
-    #default starting date, which is a date in utc seconds
-    #this is set to day before KLRN Passport started
-    last_date = datetime_to_seconds(datetime.date(2016, 4, 3))  
+#default starting date, which is a date in utc seconds
+#this is set to day before KLRN Passport started
+last_date = datetime_to_seconds(datetime.date(2016, 4, 3))  
 ```
 
 Scraping results from db_referrers.py and db_videos.py get printed out. Code in scrapers.py and scrapers_selenium.py often needs refactoring or additions to deal with changes on web pages. 
@@ -53,8 +51,8 @@ These files create tables and graphics, and adds them to the output folder. Each
 The queries_views_episodes.py can be run alone or through queries_views_channels.py by setting `run_episodes = True`
 
 <br>
-
 ![](images/trending_stats.jpg)
+<br>
 ![](images/stats.jpg)
 
 ### Searching the database
@@ -65,7 +63,7 @@ With DB Browser open, click the Open Database button at the top. In the file nav
 
 Click the Browse Data tab to view, sort and filter the data tables. 
 
-Click the Execute SQL tab to open an interface to run SQL queries. In the app folder, the file queries.txt provides some basic queries.
+Click the Execute SQL tab to open an interface to run SQL queries. In the app folder, the file queries.txt provides basic queries.
 
 ### Other files
 
