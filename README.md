@@ -8,11 +8,7 @@ This application pulls daily stats for URLS with the "referrer=" tag, along with
 
 Another part of the application charts and visualizes top shows and episodes that send the most people to KLRN's Passport donation page, and which ones bring in the most dollars.
 
-<br>
-
 ![Top Shows and Donations](images/top_shows_donations.png) 
-
-<br>
 
 ### Getting started
 
@@ -46,8 +42,6 @@ Also, scrapers_selenium.py uses chromedriver.exe, located in the bin folder. Cod
 
 ![](images/stats.jpg)
 
-<br>
-
 ### Charting and graphing  
 
 To run visualizations, the Python library Matplotlib must be installed.
@@ -63,8 +57,6 @@ The queries_views_episodes.py can be run alone or through queries_views_channels
 <br>
 
 ![](images/trending_stats.jpg)
-
-<br>
 
 ### Searching the database
 
