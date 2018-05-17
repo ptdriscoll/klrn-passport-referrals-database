@@ -38,6 +38,8 @@ To help check scrapers, the scrape_page() functions in db_referrers.py and db_vi
 
 Also, scrapers_selenium.py uses chromedriver.exe, located in the bin folder. Code often breaks when a chromedriver.exe version is too old.
 
+<br>
+
 ![](images/stats.jpg)
 
 ### Charting and graphing  
