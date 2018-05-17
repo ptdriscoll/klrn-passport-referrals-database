@@ -4,7 +4,7 @@ This is an analytics database and visualization tool to track PBS video referral
 
 Referrals are tracked through a "referrer=" query that PBS adds to KLRN's donation-page link. The queries, reported in Google Analytics, show what web addresses the clicks came from.
 
-This application pulls daily stats for URLS with the "referrer=" tag, along with related eCommerce stats, from Google Analytics. Web scrapers follow each web address in the "referrer" tag to grab video IDs, titles and descriptions, which are then stored in a SQLite database.
+This application pulls daily stats for URLS with the "referrer=" tag, along with related eCommerce stats, from Google Analytics. Web scrapers follow the referred web addresses to grab video IDs, titles and descriptions. All gets stored in a SQLite database.
 
 Another part of the application charts and visualizes top shows and episodes that send the most people to KLRN's Passport donation page, and which ones bring in the most dollars.
 
