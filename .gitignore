@@ -1,0 +1,8 @@
+.DS_Store
+*.pyc
+*.log
+ARCHIVED/
+reference/
+tests/
+app/committed/
+app/test2.py

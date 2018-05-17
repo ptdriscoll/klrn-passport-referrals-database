@@ -1,0 +1,145 @@
+NOTE: SEARCHES INCLUDE END DATE
+
+
+#Three main stats
+##############################
+SELECT 
+  LOWER(Videos.content_channel) AS channel,
+  SUM(Pages.pageviews) AS pageviews,
+  SUM(Pages.time_on_page) AS engagement,
+  SUM(Pages.page_value) AS donations
+FROM Pages	
+INNER JOIN Referrers ON Pages.referrer_id = Referrers.id
+INNER JOIN Videos ON Referrers.video_id = Videos.id  
+WHERE Pages.date_seconds_id >= strftime('%s', '2017-07-20')
+AND Pages.date_seconds_id <= strftime('%s', '2017-08-04')
+GROUP BY channel 
+ORDER BY pageviews DESC;
+
+
+#Top channels viewed
+##############################
+SELECT 
+  LOWER(Videos.content_channel) AS channel,
+  SUM(Pages.pageviews) AS pageviews,
+  SUM(Pages.time_on_page) AS engagement,
+  SUM(Pages.page_value) AS donations
+FROM Pages	
+INNER JOIN Referrers ON Pages.referrer_id = Referrers.id
+INNER JOIN Videos ON Referrers.video_id  = Videos.id  
+WHERE Pages.date_seconds_id >= strftime('%s', '2018-04-19')
+AND Pages.date_seconds_id <= strftime('%s', '2018-04-26')
+GROUP BY channel 
+ORDER BY pageviews DESC;
+
+
+#Top episodes viewed
+##############################
+SELECT 
+  LOWER(Videos.content_channel),
+  LOWER(Videos.title),
+  SUM(Pages.pageviews) AS total_views,
+  SUM(Pages.time_on_page) AS engagement,
+  SUM(Pages.page_value) AS donations
+FROM Pages	
+INNER JOIN Referrers ON Pages.referrer_id = Referrers.id
+INNER JOIN Videos ON Referrers.video_id = Videos.id  
+WHERE Pages.date_seconds_id >= strftime('%s', '2018-04-23')
+AND Pages.date_seconds_id <= strftime('%s', '2018-04-30')
+GROUP BY Videos.content_channel, Videos.title 
+ORDER BY total_views DESC;
+
+
+#Per channel per day
+##############################
+SELECT 
+    LOWER(Videos.content_channel) AS channel,
+    SUM(Pages.pageviews) AS pageviews,
+    SUM(Pages.time_on_page) AS engagement,
+    SUM(Pages.page_value) AS donations
+FROM Pages	
+INNER JOIN Referrers ON Pages.referrer_id = Referrers.id
+INNER JOIN Videos ON Referrers.video_id = Videos.id  
+WHERE Pages.date_seconds_id >= strftime('%s', '2017-08-01')
+AND channel = 'grantchester - masterpiece'
+GROUP BY channel;
+
+
+#Total views
+##############################
+SELECT SUM(Pages.pageviews) AS total_views
+FROM Pages
+WHERE Pages.date_seconds_id >= strftime('%s', '2017-05-10')
+AND Pages.date_seconds_id  <= strftime('%s', '2017-05-12')
+
+
+#Highest engagement
+##############################
+SELECT 
+  Videos.content_channel,
+  SUM(Pages.time_on_page) AS total_engagement
+FROM Pages	
+INNER JOIN Referrers ON Pages.referrer_id = Referrers.id
+INNER JOIN Videos ON Referrers.video_id = Videos.id  
+WHERE Pages.date_seconds_id >= strftime('%s', '2017-05-10')
+AND Pages.date_seconds_id  <= strftime('%s', '2017-05-12')
+GROUP BY Videos.content_channel 
+ORDER BY total_engagement DESC;
+
+
+#Highest dollars
+##############################
+SELECT 
+  Videos.content_channel,
+  SUM(Pages.page_value) AS total_dollars
+FROM Pages	
+INNER JOIN Referrers ON Pages.referrer_id = Referrers.id
+INNER JOIN Videos ON Referrers.video_id = Videos.id  
+WHERE Pages.date_seconds_id >= strftime('%s', '2018-01-01')
+AND Pages.date_seconds_id  <= strftime('%s', '2018-04-09')
+GROUP BY Videos.content_channel 
+ORDER BY total_dollars DESC;
+
+
+#Monthly counts
+##############################
+SELECT 
+  strftime('%Y-%m', Dates.date) AS month,
+  SUM(Pages.pageviews) AS pageviews,
+  SUM(Pages.page_value) AS donations
+FROM Pages	
+LEFT JOIN Dates ON Dates.seconds_id = Pages.date_seconds_id 
+WHERE Pages.date_seconds_id >= strftime('%s', '2016-09-01')
+AND Pages.date_seconds_id  <= strftime('%s', '2017-04-30')
+GROUP BY month 
+ORDER BY month;
+
+SELECT 
+    strftime('%Y-%m', Dates.date) AS dates,
+    SUM(Pages.pageviews) AS pageviews,
+    SUM(Pages.page_value) AS donations
+FROM Pages  
+LEFT JOIN Dates ON Dates.seconds_id = Pages.date_seconds_id 
+WHERE Pages.date_seconds_id >= strftime('%s', '2017-09-01')
+AND Pages.date_seconds_id  <= strftime('%s', '2017-04-30')
+GROUP BY dates 
+ORDER BY dates;
+
+
+#Check null video ids
+##############################
+SELECT 
+  Videos.id,
+  Videos.title,
+  Referrers.id,
+  Referrers.video_id,
+  Referrers.referrer,
+  Referrers.title,
+  Dates.seconds_id,   
+  Dates.date
+FROM Videos 
+LEFT OUTER JOIN Referrers ON Videos.id = Referrers.video_id
+LEFT OUTER JOIN Pages ON Referrers.id = Pages.referrer_id 
+LEFT OUTER JOIN Dates ON Dates.seconds_id = Pages.date_seconds_id 
+WHERE Videos.title IS NULL
+ORDER BY Dates.seconds_id DESC;
