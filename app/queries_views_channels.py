@@ -28,8 +28,8 @@ settings
 
 #stats include start and end dates 
 #trends include start date BUT NOT end date     
-start = '2018-05-07' 
-end = '2018-05-14' 
+start = '2018-06-25' 
+end = '2018-07-02' 
 
 #set query_type to either stats or trends
 query_type = 'trends'

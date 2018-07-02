@@ -13,11 +13,18 @@ chrome_path = 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s'
 def iframe_partnerPlayer_id(url):
     #driver = webdriver.Firefox(executable_path = 'bin/geckodriver.exe')
     driver = webdriver.Chrome('bin/chromedriver.exe')
+    
     css_selectors = '''
         #partnerPlayer,
-        iframe.video-player__iframe
-    '''    
-
+        iframe.video-player__iframe,
+        #mount-jwplayer
+    ''' 
+    
+    re_searches = [
+        r'id="video_([0-9]+)"',
+        r'\s+"contentID":\s+(\d+),'
+    ]
+    
     for attempt in xrange(2):
         try:
             if attempt == 0: driver.get(url)
@@ -27,16 +34,17 @@ def iframe_partnerPlayer_id(url):
             html = driver.page_source
             
             #if html was grabbed, try to get video id    
-            video_id_search = re.search(r'id="video_([0-9]+)"', html)
-            if video_id_search: 
-                driver.close()
-                driver.quit()        
-                return video_id_search.group(1) 
+            for re_search in re_searches:
+                video_id_search = re.search(re_search, html)
+                if video_id_search: 
+                    driver.close()
+                    driver.quit()        
+                    return video_id_search.group(1) 
             
-            else: continue #refresh browser and trying one more time
+            continue #refresh browser and try one more time
            
         except Exception as e:            
-            print '\nERROR:', e, 'ERROR TYPE:', type(e).__name__
+            print '\nERROR TYPE:', type(e).__name__
 
             #not all pages make video available on first load, so try again with refresh 
             if attempt == 0: 

@@ -20,12 +20,18 @@ import scrapers
 from scrapers_selenium import iframe_partnerPlayer_id
 
 
+#Python regex tester
+#https://regex101.com/
+
+
+#see if id is in url (ids are now replaced by slugs)
 def get_video_id(referrer):
     if 'pbs.org/video/' in referrer or 'video.klrn.org/video/' in referrer:
         parts = urlparse(referrer).path.split('/')   
         for part in reversed(parts):
             if part: return part    
     return None  
+
 
 def referrers_scrape_page(url, video_id):
     #make sure video_id can be converted to an integer
@@ -56,7 +62,7 @@ def referrers_scrape_page(url, video_id):
     #if no video_id, loop through imported scrapers to look for it 
     for key, val in scrapers.__dict__.iteritems():
         if video_id: break
-        if callable(val) and key == 'partnerPlayer_id_embed':            
+        if callable(val): #and key == 'partnerPlayer_id_embed':            
             print '\nCALLING:', key
             print 'URL:', url
             video_id = val(soup)   
@@ -71,7 +77,9 @@ def referrers_scrape_page(url, video_id):
     if not video_id: video_id = iframe_partnerPlayer_id(url)  
         
     return title, video_id  
-    
+
+
+#get video title, description, etc. from video page in COVE     
 def video_scrape_page(video_id):
     url = 'https://video.klrn.org/video/%s/' % video_id
     
@@ -107,15 +115,25 @@ def video_scrape_page(video_id):
 
 '''
 RUN
-'''    
+'''
+
+print ''
+
+url = 'http://www.pbs.org/wgbh/nova/earth/killer-floods.html'
+url = 'https://www.pbs.org/wgbh/masterpiece/episodes/victoria-s2-e1/'
+#url = 'http://player.pbs.org/partnerplayer/1swkRFEIA0865nS-Y-bjEQ==/?w=680&amp;h=430.2397&amp;chapterbar=true&amp;endscreen=false&amp;topbar=true&amp;wmode=transparent'
+#3006473602
 
 #print '\n', get_video_id(url)  
-
-url = 'http://www.pbs.org/food/features/great-british-baking-show-season-4-episode-10-final/'
-print referrers_scrape_page(url, '')
-
+#print referrers_scrape_page(url, '')
 #print video_scrape_page('2365392760')
 
 
-    
+#try to get id just through selenium
+print iframe_partnerPlayer_id(url)
+
+
+
+
+
 
