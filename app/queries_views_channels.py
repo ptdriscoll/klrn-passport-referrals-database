@@ -27,12 +27,14 @@ settings
 '''
 
 #stats include start and end dates 
-#trends include start date BUT NOT end date     
-start = '2018-06-25' 
-end = '2018-07-02' 
+#trends include start date BUT NOT end date  
+start = '2016-04-01'     
+start = '2019-06-13' 
+end = '2019-06-20' 
 
 #set query_type to either stats or trends
-query_type = 'trends'
+query_type = 'stats'
+#query_type = 'trends'
 
 #if query_type is trends, set how many days to plot 
 plot_days=8
@@ -94,7 +96,8 @@ def capitalize(title):
 def get_stats(rows, root, count=10, print_stats=True):    
     cols = [] #to return for plot_daily
     print '\nViews\tEngage\tDonate\tValue\tTitle\n'
-    for row in rows:        
+    count = 0
+    for row in rows:
         if count == 0: break 
         if not row[1]: break 
         if row[0]: 
@@ -114,6 +117,7 @@ def get_stats(rows, root, count=10, print_stats=True):
                 if not row[1]: break
                 if row[0]:
                     title = capitalize(row[0])
+                    title = '"' + title + '"'
                     title = title.encode('utf-8') 
                 else: title = ''    
                 text +='{},{},{},{},{}\n'.format(title, row[1], int(row[2]), int(row[3]), '{0:.2f}'.format(row[3]/float(row[1])))

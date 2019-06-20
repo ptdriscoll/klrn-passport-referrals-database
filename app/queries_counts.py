@@ -9,8 +9,8 @@ settings
 
 #stats include start and end dates
 start = '2016-04-01'    
-start = '2018-01-01'
-end = '2018-02-28'
+#start = '2017-10-01'
+end = '2019-06-01'
 
 #query by day, week or month
 query_type = 'month'

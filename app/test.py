@@ -63,8 +63,9 @@ def referrers_scrape_page(url, video_id):
     for key, val in scrapers.__dict__.iteritems():
         if video_id: break
         if callable(val): #and key == 'partnerPlayer_id_embed':            
-            print '\nCALLING:', key
+            print 'CALLING:', key
             print 'URL:', url
+            print
             video_id = val(soup)   
             
             #again, make sure video_id can be converted to an integer
@@ -117,20 +118,18 @@ def video_scrape_page(video_id):
 RUN
 '''
 
-print ''
+print 
 
-url = 'http://www.pbs.org/wgbh/nova/earth/killer-floods.html'
-url = 'https://www.pbs.org/wgbh/masterpiece/episodes/victoria-s2-e1/'
-#url = 'http://player.pbs.org/partnerplayer/1swkRFEIA0865nS-Y-bjEQ==/?w=680&amp;h=430.2397&amp;chapterbar=true&amp;endscreen=false&amp;topbar=true&amp;wmode=transparent'
-#3006473602
+test_url = 'http://www.pbs.org/pov/survivors/video-survivors/'
+
 
 #print '\n', get_video_id(url)  
-#print referrers_scrape_page(url, '')
+print '\n', referrers_scrape_page(test_url, '')
 #print video_scrape_page('2365392760')
 
 
 #try to get id just through selenium
-print iframe_partnerPlayer_id(url)
+#print iframe_partnerPlayer_id(url)
 
 
 

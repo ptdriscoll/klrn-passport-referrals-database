@@ -130,7 +130,7 @@ def timeline(inputf, outputf, title_text, to_plot=5):
     x_ticks = range(0, len(df.index))
     
     #plot
-    fig, ax = plt.subplots(1, figsize=(9,4))
+    fig, ax = plt.subplots(1, figsize=(9,5))
     #df = df[df.columns[::-1]] #reverse order of columns
     #print df.columns
     patches = []
@@ -161,7 +161,7 @@ def timeline(inputf, outputf, title_text, to_plot=5):
     plt.xticks(x_ticks, df.index.values)
     
     #add title 
-    title_margin = 1.11 + len(patches) * 0.07
+    title_margin = 1.07 #1.11 #+ len(patches) * 0.07
     #print '\n', title_margin 
     title = fig.suptitle(title_text, color=text_color, size=20, x=0.5, y=title_margin)
     

@@ -17,17 +17,20 @@ def iframe_partnerPlayer_id(url):
     css_selectors = '''
         #partnerPlayer,
         iframe.video-player__iframe,
-        #mount-jwplayer
+        #mount-jwplayer,
+        iframe.pov-partnerPlayer-video
     ''' 
     
     re_searches = [
         r'id="video_([0-9]+)"',
-        r'\s+"contentID":\s+(\d+),'
+        r'\s+"contentID":\s+(\d+),',
+        r'\s+"video_type": "full_length", "id":\s+"(\d+)",',
+        r'\s+"video_type": "preview", "id":\s+"(\d+)",'
     ]
-    
+
     for attempt in xrange(2):
         try:
-            if attempt == 0: driver.get(url)
+            if attempt == 0: driver.get(url)            
             else: driver.refresh() 
             wait = WebDriverWait(driver, 5)
             wait.until(EC.frame_to_be_available_and_switch_to_it((By.CSS_SELECTOR, css_selectors))) 

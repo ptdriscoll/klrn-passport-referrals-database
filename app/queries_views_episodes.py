@@ -25,8 +25,8 @@ settings
 '''
 
 #stats DO NOT include end date     
-start = '2018-04-23' 
-end = '2018-04-30'
+start = '2018-12-26' 
+end = '2019-01-02'
 
 root = '\\\\ALLEG\\General\\Public Relations\\ONLINE\\Passport\\STATS\\Referrals\\'
 
