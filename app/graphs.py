@@ -73,7 +73,7 @@ def pie_chart(inputf, outputf, title_text, include_others=True):
         return ('%1.f%%' % x) if x > 5 else '' 
     
     fig, ax = plt.subplots(1, figsize=(4, 4))
-    
+
     patches, texts, autotexts = ax.pie(        
         df['Views'],
         labels = df['Channel'], 
@@ -98,10 +98,12 @@ def pie_chart(inputf, outputf, title_text, include_others=True):
         patch.set_linewidth(2)
         patch.set_facecolor(colors[count])
         count += 1
-  
-    for text in texts:
-        text.set_color('#666666') 
-        text.set_size(13.5)
+    
+    for i in range(len(texts)):
+        texts[i].set_color('#666666') 
+        texts[i].set_size(13.5)
+        #if i == 3:
+        #    texts[i].set_text('\n\n' + texts[i].get_text())
     
     for text in autotexts:
         text.set_color('white') 

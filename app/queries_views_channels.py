@@ -28,13 +28,13 @@ settings
 
 #stats include start and end dates 
 #trends include start date BUT NOT end date  
-start = '2016-04-01'     
-start = '2019-06-13' 
-end = '2019-06-20' 
+start = '2016-04-01' # start of Passport    
+start = '2019-11-14' 
+end = '2019-11-21' 
 
 #set query_type to either stats or trends
 query_type = 'stats'
-#query_type = 'trends'
+query_type = 'trends'
 
 #if query_type is trends, set how many days to plot 
 plot_days=8
@@ -255,6 +255,8 @@ def run(start, end, root, query_type='stats', sort='pageviews', plot_days=7):
         #get most viewed
         query = query_string.format(start, end, sort)
         rows = cur.execute(query).fetchall()
+        if len(rows) == 0:
+            sys.exit('\nQUERY TO DATABASE RETURNED EMPTY') 
         shows, outputf = get_stats(rows, root, print_stats=False)
         if len(shows) > 0:
             plot_daily(shows, outputf, cur, root, end, title='Top', number_days=plot_days)
@@ -262,7 +264,9 @@ def run(start, end, root, query_type='stats', sort='pageviews', plot_days=7):
         
     else: 
         query = query_string.format(start, end, sort)
-        rows = cur.execute(query).fetchall()
+        rows = cur.execute(query).fetchall()   
+        if len(rows) == 0:
+            sys.exit('\nQUERY TO DATABASE RETURNED EMPTY')        
         get_stats(rows, root)
 
     conn.close()  
