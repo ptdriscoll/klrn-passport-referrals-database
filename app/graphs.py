@@ -40,7 +40,7 @@ def pie_chart(inputf, outputf, title_text, include_others=True):
     cut = 5 if include_others else 6
     df_others = df.iloc[cut:]
     df = df.iloc[:cut]
-    print '\n', df   
+    #print '\n', df   
     
     #add others
     if include_others:

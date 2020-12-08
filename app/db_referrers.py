@@ -10,8 +10,11 @@ from scrapers_selenium import iframe_partnerPlayer_id
 
 
 def get_video_id(referrer):
-    if ('pbs.org/video/' in referrer or 'video.klrn.org/video/' in referrer 
-    or 'player.pbs.org/widget/' in referrer):
+    if ('pbs.org/video/' in referrer 
+        or 'video.klrn.org/video/' in referrer 
+        or 'player.pbs.org/widget/' in referrer
+        or 'player.pbs.org/stationplayer/' in referrer
+        or 'player.pbs.org/portalplayer/' in referrer): 
         parts = urlparse(referrer).path.split('/')   
         for part in reversed(parts):
             if part: return part    

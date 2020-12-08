@@ -28,9 +28,9 @@ settings
 
 #stats include start and end dates 
 #trends include start date BUT NOT end date  
-start = '2016-04-01' # start of Passport    
-start = '2019-11-14' 
-end = '2019-11-21' 
+start = '2016-04-01' # start of Passport
+start = '2020-11-17' 
+end = '2020-11-24' 
 
 #set query_type to either stats or trends
 query_type = 'stats'
@@ -42,7 +42,7 @@ plot_days=8
 #also get top show episodes (other queries run just top shows)   
 run_episodes = True
 
-root = '\\\\ALLEG\\General\\Public Relations\\ONLINE\\Passport\\STATS\\Referrals\\'
+root = 'T:\\Public Relations\\ONLINE\\Passport\\STATS\\Referrals\\'
 
 
 '''
@@ -96,7 +96,6 @@ def capitalize(title):
 def get_stats(rows, root, count=10, print_stats=True):    
     cols = [] #to return for plot_daily
     print '\nViews\tEngage\tDonate\tValue\tTitle\n'
-    count = 0
     for row in rows:
         if count == 0: break 
         if not row[1]: break 
@@ -105,7 +104,7 @@ def get_stats(rows, root, count=10, print_stats=True):
             title = capitalize(row[0])             
         print row[1], '\t', int(row[2]), '\t', int(row[3]), '\t', '{0:.2f}'.format(row[3]/float(row[1])), '\t', title
         count -= 1
-    
+
     date = datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')  
     outputf = 'output/stats_{}.csv'.format(date)    
     text = '{}\n'.format(query_header)
@@ -123,13 +122,13 @@ def get_stats(rows, root, count=10, print_stats=True):
                 text +='{},{},{},{},{}\n'.format(title, row[1], int(row[2]), int(row[3]), '{0:.2f}'.format(row[3]/float(row[1])))
             f.write(text) 
         
-    #plot results      
+    #plot and/or return results      
     inputf = os.path.join(root, outputf)    
-    outputf = os.path.join(root, outputf.replace('csv', 'jpg'))
-    title = 'Top Referral Channels'
-    include_others = True
+    outputf = os.path.join(root, outputf.replace('csv', 'png'))
     
     if print_stats: 
+        title = 'Top Referral Channels'
+        include_others = True    
         pie_chart(inputf, outputf, title, include_others) 
 
     #return list of shows and new outputf
@@ -198,7 +197,7 @@ def get_trending(cur, root, end):
     for row in results:
         shows.append(row[0])
         
-    outputf = os.path.join(root, outputf.replace('csv', 'jpg'))
+    outputf = os.path.join(root, outputf.replace('csv', 'png'))
         
     return shows, outputf    
         
@@ -256,7 +255,7 @@ def run(start, end, root, query_type='stats', sort='pageviews', plot_days=7):
         query = query_string.format(start, end, sort)
         rows = cur.execute(query).fetchall()
         if len(rows) == 0:
-            sys.exit('\nQUERY TO DATABASE RETURNED EMPTY') 
+            sys.exit('\nQUERY TO DATABASE RETURNED EMPTY')
         shows, outputf = get_stats(rows, root, print_stats=False)
         if len(shows) > 0:
             plot_daily(shows, outputf, cur, root, end, title='Top', number_days=plot_days)

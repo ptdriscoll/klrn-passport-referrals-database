@@ -25,7 +25,7 @@ def scrape_page(video_id):
         content_channel = content_channel[0].text.strip() 
     else: content_channel = None    
 
-    description = soup.select('p.video-player__details__description')
+    description = soup.select('p.video-player__description')
     if description and description[0]:
         description = description[0].text.strip()  
     else: description = None

@@ -26,14 +26,17 @@ from scrapers_selenium import iframe_partnerPlayer_id
 
 #see if id is in url (ids are now replaced by slugs)
 def get_video_id(referrer):
-    if ('pbs.org/video/' in referrer or 'video.klrn.org/video/' in referrer 
-        or 'player.pbs.org/widget/' in referrer):        
+    if ('pbs.org/video/' in referrer 
+        or 'video.klrn.org/video/' in referrer 
+        or 'player.pbs.org/widget/' in referrer
+        or 'player.pbs.org/stationplayer/' in referrer
+        or 'player.pbs.org/portalplayer/' in referrer):        
         parts = urlparse(referrer).path.split('/')   
         for part in reversed(parts):
             if part: return part    
     return None  
 
-
+#tests scrape_page from referrers module
 def referrers_scrape_page(url, video_id):
     #make sure video_id can be converted to an integer
     if video_id: 
@@ -81,8 +84,9 @@ def referrers_scrape_page(url, video_id):
     return title, video_id  
 
 
+#test scrape_page from videos module
 #get video title, description, etc. from video page in COVE     
-def video_scrape_page(video_id):
+def videos_scrape_page(video_id):
     url = 'https://video.klrn.org/video/%s/' % video_id
     
     try:
@@ -102,7 +106,7 @@ def video_scrape_page(video_id):
         content_channel = content_channel[0].text.strip() 
     else: content_channel = None    
 
-    description = soup.select('p.video-player__details__description')
+    description = soup.select('p.video-player__description')
     if description and description[0]:
         description = description[0].text.strip()  
     else: description = None
@@ -116,17 +120,30 @@ def video_scrape_page(video_id):
 
 
 '''
+DATA
+'''
+
+test_url = 'https://www.pbs.org/video/american-as-hand-pie-fnovsc/'
+#test_url = 'https://video.klrn.org/video/episode-one-zpzual/';
+video_id = '3042116982'
+
+#ID: 3042116982
+#TITLE: May 5, 2020
+#CONTENT CHANNEL: Amanpour and Company
+#DESCRIPTION: None
+#IMAGE: https://image.pbs.org/video-assets/dvzFcPR-asset-mezzanine-16x9-OM1HbR1.jpg.crop.200x112.jpg
+#PAGE SCRAPED: 1
+
+
+'''
 RUN
 '''
 
-print 
-
-test_url = 'http://player.pbs.org/widget/partnerplayer/3033059190/?uid=22e7bc70-036a-432d-8f59-f84b535756ee'
-#test_url = 'http://player.pbs.org/widget/partnerplayer/3033267651/?uid=22e7bc70-036a-432d-8f59-f84b535756ee'
+print
 
 print '\n', get_video_id(test_url)  
-#print '\n', referrers_scrape_page(test_url, '')
-#print video_scrape_page('2365392760')
+print '\n', referrers_scrape_page(test_url, '')
+#print videos_scrape_page(video_id)
 
 
 #try to get id just through selenium
