@@ -9,13 +9,13 @@ settings
 
 #stats include start and end dates
 start = '2016-04-01'    
-#start = '2017-10-01'
-end = '2019-06-01'
+start = '2020-04-01'
+end = '2021-04-01'
 
 #query by day, week or month
 query_type = 'month'
 
-root = '//alleg/General/Public Relations/ONLINE/Passport/STATS/Referrals/'   
+root = 'T:\\Public Relations\\ONLINE\\Passport\\STATS\\Referrals\\'   
 
 
 '''

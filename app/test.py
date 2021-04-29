@@ -111,9 +111,10 @@ def videos_scrape_page(video_id):
         description = description[0].text.strip()  
     else: description = None
 
-    image = soup.select('div.modal-body__info img')
+    #image = soup.select('div.modal-body__info img')
+    image = soup.select('#embed-modal__dialog > div > div.modal-window__content > div.embed-modal__info > img') 
     if image and image[0]: 
-        image = image[0]['src'].strip() 
+        image = image[0]['data-src'].strip() 
     else: image = None    
  
     return title, content_channel, description, image
@@ -123,16 +124,11 @@ def videos_scrape_page(video_id):
 DATA
 '''
 
-test_url = 'https://www.pbs.org/video/american-as-hand-pie-fnovsc/'
+test_url = 'https://video.klrn.org/video/who-overseeing-covid-19-bailout-money-no7nsj/'
 #test_url = 'https://video.klrn.org/video/episode-one-zpzual/';
-video_id = '3042116982'
+video_id = '3042119795'
 
-#ID: 3042116982
-#TITLE: May 5, 2020
-#CONTENT CHANNEL: Amanpour and Company
-#DESCRIPTION: None
-#IMAGE: https://image.pbs.org/video-assets/dvzFcPR-asset-mezzanine-16x9-OM1HbR1.jpg.crop.200x112.jpg
-#PAGE SCRAPED: 1
+#(u'Amanpour and Company | Who Is Overseeing the COVID-19 Bailout Money? | Season 2020 | KLRN', u'3042119795')
 
 
 '''
@@ -141,9 +137,9 @@ RUN
 
 print
 
-print '\n', get_video_id(test_url)  
-print '\n', referrers_scrape_page(test_url, '')
-#print videos_scrape_page(video_id)
+#print '\n', get_video_id(test_url)  
+#print '\n', referrers_scrape_page(test_url, '')
+print videos_scrape_page(video_id)
 
 
 #try to get id just through selenium

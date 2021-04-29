@@ -27,8 +27,8 @@ SELECT
 FROM Pages	
 INNER JOIN Referrers ON Pages.referrer_id = Referrers.id
 INNER JOIN Videos ON Referrers.video_id  = Videos.id  
-WHERE Pages.date_seconds_id >= strftime('%s', '2018-04-19')
-AND Pages.date_seconds_id <= strftime('%s', '2018-04-26')
+WHERE Pages.date_seconds_id >= strftime('%s', '2020-04-01')
+AND Pages.date_seconds_id <= strftime('%s', '2021-04-01')
 GROUP BY channel 
 ORDER BY pageviews DESC;
 

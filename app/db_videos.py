@@ -30,9 +30,9 @@ def scrape_page(video_id):
         description = description[0].text.strip()  
     else: description = None
 
-    image = soup.select('div.modal-body__info img')
+    image = soup.select('#embed-modal__dialog > div > div.modal-window__content > div.embed-modal__info > img') 
     if image and image[0]: 
-        image = image[0]['src'].strip() 
+        image = image[0]['data-src'].strip() 
     else: image = None    
  
     return title, content_channel, description, image
@@ -83,7 +83,7 @@ def print_data(id, title, content_channel, description, image, page_scraped):
     print 'ID:', id
     print 'TITLE:', title
     print 'CONTENT CHANNEL:', content_channel
-    print 'DESCRIPTION:', description 
+    print 'DESCRIPTION:', description.encode('utf-8') 
     print 'IMAGE:', image
     print 'PAGE SCRAPED:', page_scraped
     print ''

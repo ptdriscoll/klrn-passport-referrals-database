@@ -29,12 +29,12 @@ settings
 #stats include start and end dates 
 #trends include start date BUT NOT end date  
 start = '2016-04-01' # start of Passport
-start = '2020-11-17' 
-end = '2020-11-24' 
+start = '2021-04-13' 
+end = '2021-04-20' 
 
 #set query_type to either stats or trends
 query_type = 'stats'
-query_type = 'trends'
+#query_type = 'trends'
 
 #if query_type is trends, set how many days to plot 
 plot_days=8
