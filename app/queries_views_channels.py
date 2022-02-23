@@ -29,8 +29,8 @@ settings
 #stats include start and end dates 
 #trends include start date BUT NOT end date  
 start = '2016-04-01' # start of Passport
-start = '2021-04-13' 
-end = '2021-04-20' 
+start = '2022-02-16' 
+end = '2022-02-23' 
 
 #set query_type to either stats or trends
 query_type = 'stats'
@@ -101,7 +101,8 @@ def get_stats(rows, root, count=10, print_stats=True):
         if not row[1]: break 
         if row[0]: 
             cols.append(row[0]) 
-            title = capitalize(row[0])             
+            title = capitalize(row[0]) 
+        else: title = ''       
         print row[1], '\t', int(row[2]), '\t', int(row[3]), '\t', '{0:.2f}'.format(row[3]/float(row[1])), '\t', title
         count -= 1
 
@@ -118,7 +119,7 @@ def get_stats(rows, root, count=10, print_stats=True):
                     title = capitalize(row[0])
                     title = '"' + title + '"'
                     title = title.encode('utf-8') 
-                else: title = ''    
+                else: continue    
                 text +='{},{},{},{},{}\n'.format(title, row[1], int(row[2]), int(row[3]), '{0:.2f}'.format(row[3]/float(row[1])))
             f.write(text) 
         

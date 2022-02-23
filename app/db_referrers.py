@@ -10,6 +10,20 @@ from db_backup import database_backup
 import scrapers 
 from scrapers_selenium import iframe_partnerPlayer_id
 
+#set default coding to utf8 and fix where output is directed 
+#https://stackoverflow.com/questions/25494182/print-not-showing-in-ipython-notebook-python
+import sys
+stdout = sys.stdout
+reload(sys)  
+sys.setdefaultencoding('utf8')
+sys.stdout = stdout
+
+
+# Add try except on line ... 126?
+# https://stackoverflow.com/questions/32613375/python-2-7-exception-handling-syntax/32616285
+# Or makes sure that line is utf-8
+# description.encode('utf-8')
+
 
 def get_video_id(referrer):
     if ('pbs.org/video/' in referrer 

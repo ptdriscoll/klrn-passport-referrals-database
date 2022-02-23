@@ -79,6 +79,7 @@ def db_update(conn, cur, row):
     return title
 
 def print_data(id, title, content_channel, description, image, page_scraped):
+    description = description if description else 'None'
     print ''
     print 'ID:', id
     print 'TITLE:', title
