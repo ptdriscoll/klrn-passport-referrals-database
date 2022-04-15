@@ -112,9 +112,19 @@ def videos_scrape_page(video_id):
     else: description = None
 
     #image = soup.select('div.modal-body__info img')
-    image = soup.select('#embed-modal__dialog > div > div.modal-window__content > div.embed-modal__info > img') 
-    if image and image[0]: 
-        image = image[0]['data-src'].strip() 
+    #image = soup.select('#embed-modal__dialog > div > div.modal-window__content > div.embed-modal__info > img')
+    #image = soup.select('div.embed-modal__info img.embed-modal__image')  
+    #if image and image[0]:     
+    #    image = image[0]['src'].strip() 
+    #    print 'IMAGE'
+    #    print image
+    #    print ''        
+    
+    imgArticle = soup.select('article.video-player.container__inner') 
+    if imgArticle and imgArticle[0]:
+        imgList = re.findall('url\((.*?)\)', imgArticle[0]['style'], re.IGNORECASE)  
+        if imgList and imgList[0] and len(imgList[0]) > 3: image = imgList[0][1:-1]
+        if image: image = re.sub('blur=[0-9]&|blur=[0-9]', '', image)
     else: image = None    
  
     return title, content_channel, description, image
@@ -126,7 +136,8 @@ DATA
 
 test_url = 'https://video.klrn.org/video/who-overseeing-covid-19-bailout-money-no7nsj/'
 #test_url = 'https://video.klrn.org/video/episode-one-zpzual/';
-video_id = '3042119795'
+#video_id = '2365394531'
+video_id = '3012108382'
 
 #(u'Amanpour and Company | Who Is Overseeing the COVID-19 Bailout Money? | Season 2020 | KLRN', u'3042119795')
 

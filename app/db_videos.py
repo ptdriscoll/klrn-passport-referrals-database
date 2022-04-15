@@ -2,6 +2,7 @@ import sqlite3
 import urllib2
 from bs4 import BeautifulSoup
 import time
+import re
 from db_backup import database_backup, delete_old_backups
 
 
@@ -30,10 +31,12 @@ def scrape_page(video_id):
         description = description[0].text.strip()  
     else: description = None
 
-    image = soup.select('#embed-modal__dialog > div > div.modal-window__content > div.embed-modal__info > img') 
-    if image and image[0]: 
-        image = image[0]['data-src'].strip() 
-    else: image = None    
+    imgArticle = soup.select('article.video-player.container__inner') 
+    if imgArticle and imgArticle[0]:
+        imgList = re.findall('url\((.*?)\)', imgArticle[0]['style'], re.IGNORECASE)  
+        if imgList and imgList[0] and len(imgList[0]) > 3: image = imgList[0][1:-1]
+        if image: image = re.sub('blur=[0-9]&|blur=[0-9]', '', image)
+    else: image = None  
  
     return title, content_channel, description, image
 

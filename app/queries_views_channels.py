@@ -29,8 +29,8 @@ settings
 #stats include start and end dates 
 #trends include start date BUT NOT end date  
 start = '2016-04-01' # start of Passport
-start = '2022-02-16' 
-end = '2022-02-23' 
+start = '2022-04-08' 
+end = '2022-04-15' 
 
 #set query_type to either stats or trends
 query_type = 'stats'
