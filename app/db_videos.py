@@ -85,7 +85,8 @@ def print_data(id, title, content_channel, description, image, page_scraped):
     description = description if description else 'None'
     print ''
     print 'ID:', id
-    print 'TITLE:', title
+    try: print 'TITLE:', title
+    except: print 'TITLE:' 
     print 'CONTENT CHANNEL:', content_channel
     print 'DESCRIPTION:', description.encode('utf-8') 
     print 'IMAGE:', image

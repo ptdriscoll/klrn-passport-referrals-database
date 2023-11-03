@@ -73,6 +73,10 @@ def pie_chart(inputf, outputf, title_text, include_others=True):
         return ('%1.f%%' % x) if x > 5 else '' 
     
     fig, ax = plt.subplots(1, figsize=(4, 4))
+    
+    print 'CHECK'
+    print df['Channel']
+    print ''
 
     patches, texts, autotexts = ax.pie(        
         df['Views'],
